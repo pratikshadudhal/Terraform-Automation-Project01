@@ -75,5 +75,5 @@ resource "aws_instance" "myFirstInstance" {
 
  # tags = {
   #  Name = "my_elastic_ip"
-  }
-}
+#  }
+#}
