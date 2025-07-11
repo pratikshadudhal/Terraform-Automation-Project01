@@ -3,21 +3,32 @@ provider "aws" {
 }
 
 # ✅ VPC
-#resource "aws_vpc" "main" {
-#  cidr_block       = "172.16.0.0/16"
-# instance_tenancy = "default"
-#
-# tags = {
-#    Name = "main"
- # }
-#}
+resource "aws_vpc" "main" {
+  cidr_block       = "172.16.0.0/16"
+instance_tenancy = "default"
+
+ tags = {
+    Name = "main"
+  }
+}
+resource "aws_subnet" "main_subnet" {
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = "172.16.1.0/24"      # smaller block inside the VPC
+  availability_zone       = "us-east-1a"        # change if needed
+  map_public_ip_on_launch = true                # optional: auto-assign public IP
+
+  tags = {
+    Name = "main-subnet"
+  }
+}
+
 
 # ✅ Security Group
 
 resource "aws_security_group" "jenkins-sg-2022" {
   name        = var.security_group
   description = "Security group for EC2 instance"
-#  vpc_id      = aws_vpc.main.id
+  vpc_id      = aws_vpc.main.id
 
   ingress {
     from_port   = 8080
@@ -50,6 +61,7 @@ resource "aws_instance" "myFirstInstance" {
   ami                    = var.ami_id
   key_name               = var.key_name
   instance_type          = var.instance_type
+  subnet_id              = aws_subnet.main_subnet.id
   vpc_security_group_ids = [aws_security_group.jenkins-sg-2022.id]
 
   tags = {
