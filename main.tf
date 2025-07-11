@@ -14,7 +14,7 @@ instance_tenancy = "default"
 resource "aws_subnet" "main_subnet" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = "172.16.1.0/24"      # smaller block inside the VPC
-  availability_zone       = "us-east-1a"        # change if needed
+  availability_zone       = "ap-south-1a"        # change if needed
   map_public_ip_on_launch = true                # optional: auto-assign public IP
 
   tags = {
