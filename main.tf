@@ -3,21 +3,21 @@ provider "aws" {
 }
 
 # ✅ VPC
-resource "aws_vpc" "main" {
-  cidr_block       = "172.16.0.0/16"
+#resource "aws_vpc" "main" {
+#  cidr_block       = "172.16.0.0/16"
   instance_tenancy = "default"
-
-  tags = {
-    Name = "main"
-  }
-}
+#
+# tags = {
+#    Name = "main"
+ # }
+#}
 
 # ✅ Security Group
 
 resource "aws_security_group" "jenkins-sg-2022" {
   name        = var.security_group
   description = "Security group for EC2 instance"
-  vpc_id      = aws_vpc.main.id
+#  vpc_id      = aws_vpc.main.id
 
   ingress {
     from_port   = 8080
