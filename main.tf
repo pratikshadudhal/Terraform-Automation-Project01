@@ -70,10 +70,10 @@ resource "aws_instance" "myFirstInstance" {
 }
 
 # ✅ Elastic IP (NO vpc argument)
-resource "aws_eip" "myFirstInstance" {
-  instance = aws_instance.myFirstInstance.id
+#resource "aws_eip" "myFirstInstance" {
+#  instance = aws_instance.myFirstInstance.id
 
-  tags = {
-    Name = "my_elastic_ip"
+ # tags = {
+  #  Name = "my_elastic_ip"
   }
 }
